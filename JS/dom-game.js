@@ -25,8 +25,9 @@ startGame.addEventListener("click", function(){
    }
 
    assertCode.addEventListener("click", function (){
-      //something about guessBox.value applying to the innerHTML of
-      // whichever element there???
+       // something like this
+       headingSection.style.color = guessBox.value;
+       listSection.style.color = guessBox.value;
    });
 
 

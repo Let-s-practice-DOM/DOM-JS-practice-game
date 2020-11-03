@@ -40,10 +40,6 @@ startGame.addEventListener("click", function(){
 
 
 
-
-
-
-
 });
 
 

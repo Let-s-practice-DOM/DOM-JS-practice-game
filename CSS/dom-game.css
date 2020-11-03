@@ -1,3 +1,10 @@
 body{
-    background-color: royalblue;
+    background-color: #96989f;
+}
+#nameToAdd{
+    display: none;
+}
+
+#listToEdit{
+    display: none;
 }

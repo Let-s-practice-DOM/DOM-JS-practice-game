@@ -95,7 +95,7 @@
         // These are the left most short hortizontal lines
         fill(0, 150, 75, 10,"#093593")
         fill(0, 650, 75, 10,"#093593")
-        these are
+        //these are
         fill(525, 150, 75,10,"#093593")
         fill(525, 650, 75, 10,"#093593")
         fill(pacman.x, pacman.y, 25, 25, "yellow");//this is for the pacman

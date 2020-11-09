@@ -86,7 +86,18 @@
     }
     function draw(){
         fill(0,0, canvas.width, canvas.height, "black"); //This is for canvas
-        fill(200, 10, 10, canvas.height/2,"#093593")
+        // these are the top two short vertical lines.
+        fill(150, 0, 10, 75,"#093593")
+        fill(450, 0, 10, 75,"#093593")
+        // these are the bottom two short vertical lines
+        fill(150, 725, 10, 75,"#093593")
+        fill(450, 725, 10, 75,"#093593")
+        // These are the left most short hortizontal lines
+        fill(0, 150, 75, 10,"#093593")
+        fill(0, 650, 75, 10,"#093593")
+        these are
+        fill(525, 150, 75,10,"#093593")
+        fill(525, 650, 75, 10,"#093593")
         fill(pacman.x, pacman.y, 25, 25, "yellow");//this is for the pacman
         fill(ghost1.x, ghost1.y, size, size, "red")
     }

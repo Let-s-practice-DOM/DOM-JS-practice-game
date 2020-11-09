@@ -1,0 +1,10 @@
+body{
+    background-color: black;
+}
+#pacMan{
+    width: 85vw;
+    height: 85vh;
+    margin: 5vh 5vw;
+    border: 5px solid #093593;
+    border-radius: 50px;
+}

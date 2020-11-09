@@ -3,8 +3,8 @@
     const context = canvas.getContext("2d");
 
     const size = 25;
-
-    let pacman = {
+    const moveSpeed = 10;
+    const pacman = {
         x: 50,
         y: 50,
         move: function (direction){
@@ -12,34 +12,77 @@
                 case "Up":
                     if(this.y < 0) {
                         this.y = canvas.height;
-                    } else {this.y -=10;}
+                    } else {
+                        this.y -= moveSpeed;
+                    }
                     break;
                 case "Down":
                     if(this.y > canvas.height) {
                         this.y = 0;
-                    } else { this.y += 10;}
+                    } else {
+                        this.y += moveSpeed;
+                    }
                     break;
                 case "Left":
                     if(this.x < 0) {
                        this.x = canvas.width;
-                    }else {this.x -= 10;}
+                    } else {
+                        this.x -= moveSpeed;
+                    }
                     break;
                 case "Right":
                     if(this.x > canvas.width){
                         this.x= 0;
-                    } else {this.x += 10;}
+                    } else {
+                        this.x += moveSpeed;
+                    }
                     break;
             }
         }
     }
-    var ghost1 = {
+    const ghost1 = {
         x: 100,
         y: 100,
+        track: function () {
+            if (this.x < 0) {
+                this.x = canvas.width;
+            }
+            if (this.x > canvas.width) {
+                this.x = 0;
+            }
+            if (this.y > canvas.height) {
+                this.y = 0;
+            }
+            if (this.y < 0) {
+                this.y = canvas.height;
+            }
+            if (this.x >= pacman.x/*&& pacman.x < this.x - pacman.x*/) {//and a wall not in path other part is to prefer the path through the maze
+                this.x -= moveSpeed;
+            } else if(this.x <= pacman.x){
+                this.x += moveSpeed;
+            }
+            if (this.y >= pacman.y) {//and a wall not in path
+                this.y -= moveSpeed;
+            } else if(this.y <= pacman.y){
+                this.y += moveSpeed;
+            }
+        }
+    }
+    //playerX, playerY, ghostX, ghostY, size
+    function contact(px, py, gx, gy, s){
+        if((px + s > gx && px < gx + s) &&(py + s > gy && py < gy + s)){
+            console.log("CONTACT");
+        }
+    }
+    setInterval(tracking, 350);
+    function tracking(){
+        ghost1.track();
+        contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size);
     }
 
     setInterval(load, 50);
     function load (){
-        draw()
+        draw();
     }
     function draw(){
         fill(0,0, canvas.width, canvas.height, "black"); //This is for canvas

@@ -107,8 +107,10 @@
     }
 
     //playerX, playerY, ghostX, ghostY, size
+    // written in a way to allow any of the other ghost positions to be passed through for contact checking
     function contact(px, py, gx, gy, s){
         if((px + s > gx && px < gx + s) &&(py + s > gy && py < gy + s)){
+            //game will restart in some way
             console.log("CONTACT");
         }
     }
@@ -118,10 +120,14 @@
         contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size);
     }
 
+    // to be ran over and over
     setInterval(load, 50);
     function load (){
         draw();
+        createFoods();
     }
+
+
     function draw(){
         fill(0,0, canvas.width, canvas.height, "black"); //This is for canvas
         // these are the top two short vertical lines.
@@ -142,7 +148,35 @@
     function fill(x, y, w, h, c){
         context.fillStyle = c;
         context.fillRect(x, y, w, h);
+    }
 
+    function fillC(cX, cY, r, c){
+        context.fillStyle = c;
+        context.beginPath();
+        context.arc(cX, cY, r, 0, Math.PI*2, true);
+        context.stroke();
+        context.fill();
+    }
+    let ranNumArr = [];
+    function generateFoodsSpots(){
+        for(let i = 0; i < 25; i++){
+            let ranX = Math.floor(Math.random() * 500) + 50;
+            let ranY = Math.floor(Math.random() * 700) + 50;
+            ranNumArr.push(ranX);
+            ranNumArr.push(ranY);
+        }
+        return ranNumArr;
+    }
+    //to be ran only on initial load
+    window.onload = function(){
+        generateFoodsSpots();
+    }
+    function createFoods(){
+        for(let i = 0; i < 25; i++){
+            for(let j = 0; j < ranNumArr.length; j+=2){
+                fillC(ranNumArr[j], ranNumArr[j+1], 5, "#ffffff");
+            }
+        }
     }
 
     window.addEventListener("keydown", function (e){

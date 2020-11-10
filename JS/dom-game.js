@@ -40,6 +40,7 @@
             }
         }
     }
+    // will make more ghost later
     const ghost1 = {
         x: 100,
         y: 100,
@@ -76,13 +77,15 @@
             }
         }
     }
+    //------made to compare the values easier in the best movement functions--------//
     function makePos(num){
         if(num < 0){
             return num * -1;
         }
         return num;
     }
-    //=========BUGGY STILL, SOMETIMES DOES NOT MAKE THE RIGHT DECISION=========//
+    //=========SEEMS TO BE BEST MOVEMENT IF IT IS TO CONTINUE TO THE LEFT AND THE Y MOVE WORKS WHEN IT IS GOING UP TO APPEAR AT THE BOTTOM=======//
+    //========MAY NEED TO WRITE 2 MORE FUNCTIONS FOR THE RIGHT AND DOWN MOVEMENTS==================//
     // this will set up for a preferred movement to go through the end of the map to come out the other side if it is a
     // shorter path to get to pacman rather than turning around
     function bestMovementX(predatorX, preyX, canvasW, base){
@@ -114,6 +117,7 @@
             console.log("CONTACT");
         }
     }
+    // tracking ran at a different interval to keep the ghost movements to a relatively slower speed
     setInterval(tracking, 350);
     function tracking(){
         ghost1.track();
@@ -157,6 +161,7 @@
         context.stroke();
         context.fill();
     }
+    //====assign the random numbers only one time on initial load;
     let ranNumArr = [];
     function generateFoodsSpots(){
         for(let i = 0; i < 25; i++){
@@ -167,10 +172,11 @@
         }
         return ranNumArr;
     }
-    //to be ran only on initial load
+    //to be ran only on initial load;
     window.onload = function(){
         generateFoodsSpots();
     }
+    //-----drawing the food pellets around from the random numbers;
     function createFoods(){
         for(let i = 0; i < 25; i++){
             for(let j = 0; j < ranNumArr.length; j+=2){
@@ -179,6 +185,7 @@
         }
     }
 
+    //for movement
     window.addEventListener("keydown", function (e){
        const direction = e.key.replace("Arrow", "");
        pacman.move(direction);

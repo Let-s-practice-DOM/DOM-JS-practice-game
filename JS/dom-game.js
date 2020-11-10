@@ -56,18 +56,56 @@
             if (this.y < 0) {
                 this.y = canvas.height;
             }
-            if (this.x >= pacman.x/*&& pacman.x < this.x - pacman.x*/) {//and a wall not in path other part is to prefer the path through the maze
-                this.x -= moveSpeed;
-            } else if(this.x <= pacman.x){
-                this.x += moveSpeed;
+            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
+                if(this.x > pacman.x){
+                    this.x += moveSpeed;
+                } else this.x -= moveSpeed;
+            } else {
+                if(this.x > pacman.x){
+                    this.x -= moveSpeed;
+                } else this.x += moveSpeed;
             }
-            if (this.y >= pacman.y) {//and a wall not in path
-                this.y -= moveSpeed;
-            } else if(this.y <= pacman.y){
-                this.y += moveSpeed;
+            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
+                if(this.y > pacman.y){
+                    this.y += moveSpeed;
+                } else this.y -= moveSpeed;
+            } else {
+                if(this.y > pacman.y){
+                    this.y -= moveSpeed;
+                } else this.y += moveSpeed;
             }
         }
     }
+    function makePos(num){
+        if(num < 0){
+            return num * -1;
+        }
+        return num;
+    }
+    //=========BUGGY STILL, SOMETIMES DOES NOT MAKE THE RIGHT DECISION=========//
+    // this will set up for a preferred movement to go through the end of the map to come out the other side if it is a
+    // shorter path to get to pacman rather than turning around
+    function bestMovementX(predatorX, preyX, canvasW, base){
+        let goOtherWayX = false;
+        let currentDistanceX = predatorX - preyX;
+        currentDistanceX = makePos(currentDistanceX);
+        let possibleBestDistanceX = (makePos((base - predatorX)) + makePos((canvasW - preyX)));
+        if(possibleBestDistanceX < currentDistanceX){
+            goOtherWayX = true;
+        }
+        return goOtherWayX;
+    }
+    function bestMovementY(predatorY, preyY, canvasH, base){
+        let goOtherWayY = false;
+        let currentDistanceY = predatorY - preyY;
+        currentDistanceY = makePos(currentDistanceY);
+        let possibleBestDistanceY = (makePos((base - predatorY)) + makePos((canvasH - preyY)));
+        if(possibleBestDistanceY < currentDistanceY){
+            goOtherWayY = true;
+        }
+        return goOtherWayY;
+    }
+
     //playerX, playerY, ghostX, ghostY, size
     function contact(px, py, gx, gy, s){
         if((px + s > gx && px < gx + s) &&(py + s > gy && py < gy + s)){

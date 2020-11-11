@@ -135,48 +135,42 @@
     function draw(){
         fill(0,0, canvas.width, canvas.height, "black"); //This is for canvas
 
-        // These are the two center lines
-        fill(295, 0, 10, 75,"#093593")
-        // fill(305, 0, 10, 75,"#093593")
 
-        // top left square
+        // top row 1st square
         fill(45, 45, 55, 10,"#093593")
         fill(45, 110, 55, 10,"#093593")
         fill(45, 45, 10, 75,"#093593")
         fill(100,45,10,75, "#093593")
 
+        // Top row - second object - short vertical line
+        fill(150, 0, 10, 75,"#093593")
 
-        // second second square
-        fill(190, 45, 55, 10,"#093593")
-        fill(190, 110, 55, 10,"#093593")
-        fill(190, 45, 10, 75,"#093593")
-        fill(240, 45, 10, 75,"#093593")
-
-
-        // third right square
-        fill(350, 45, 55, 10,"#093593")
-        fill(350, 110, 55, 10,"#093593")
-        fill(350, 45, 10, 75,"#093593")
+        // top row second object - middle rectangle
+        fill(200, 45, 200, 10,"#093593")
+        fill(200, 110, 200, 10,"#093593")
+        fill(200, 45, 10, 75,"#093593")
         fill(400, 45, 10, 75,"#093593")
 
-        // // top right square
+        // Top row - fourth object - short vertical line
+        fill(450, 0, 10, 75,"#093593")
+
+        // // top row fifth object fourth square
         fill(500, 45, 65, 10,"#093593")
         fill(500, 110, 65, 10,"#093593")
         fill(555, 45, 10, 75,"#093593")
         fill(500, 45, 10, 75,"#093593")
 
-        // top left square
+        // second row first object - small square on left
         fill(45, 160, 65, 10,"#093593")
-        fill(45, 210, 55, 10,"#093593")
-        fill(45, 160, 10, 50,"#093593")
-        fill(100,160,10,60, "#093593")
-
-        // top left square
-        fill(500, 160, 55, 10,"#093593")
-        fill(500, 210, 55, 10,"#093593")
-        fill(500, 160, 10, 50,"#093593")
-        fill(555,160,10,60, "#093593")
-        // middle T
+        fill(45, 245, 65, 10,"#093593")
+        fill(45, 160, 10, 95,"#093593")
+        fill(100,160,10,95, "#093593")
+        // second row second object - vertical rectangle
+        fill(150,160,50,10, "#093593")
+        fill(150,350,50,10, "#093593")
+        fill(150,160,10,190, "#093593")
+        fill(200,160,10,200, "#093593")
+        // second row third object - middle T
         fill(250, 160, 110, 10,"#093593")
         fill(250, 210, 110, 10,"#093593")
         fill(250, 160, 10, 50,"#093593")
@@ -184,19 +178,18 @@
         fill(280,210,10,75, "#093593")
         fill(320,210,10,75, "#093593")
         fill(280,280,50,10, "#093593")
-
-        // left
-        fill(150,160,50,10, "#093593")
-        fill(150,350,50,10, "#093593")
-        fill(150,160,10,190, "#093593")
-        fill(200,160,10,200, "#093593")
-
-        // right
+        // second row fourth object - vertical rectangle
         fill(400,160,50,10, "#093593")
         fill(400,350,50,10, "#093593")
         fill(400,160,10,190, "#093593")
         fill(450,160,10,200, "#093593")
+        // second row fifth object - small square on right
+        fill(500, 160, 55, 10,"#093593")
+        fill(500, 245, 55, 10,"#093593")
+        fill(500, 160, 10, 95,"#093593")
+        fill(555,160,10,95, "#093593")
 
+        // third row - first object -left entrance
         fill(0,300,100,10, "#093593")
         fill(0,350,100,10, "#093593")
         fill(100,300,10,60, "#093593")
@@ -205,6 +198,15 @@
         fill(100,425,10,60, "#093593")
 
 
+        // third row - center rectangle
+
+        fill(250,350,110,10, "#093593")
+        fill(250,450,110,10, "#093593")
+        fill(250,350,10,100, "#093593")
+        fill(350,350,10,110, "#093593")
+        fill(275,350,60,10, "#FFFFFF")
+
+        // third row - third object - right exit
         fill(500,300,100,10, "#093593")
         fill(500,350,100,10, "#093593")
         fill(500,300,10,60, "#093593")
@@ -212,6 +214,58 @@
         fill(500,425,100,10, "#093593")
         fill(500,425,10,60, "#093593")
 
+        // fourth row - first object -left square
+        fill(50, 535, 50, 10,"#093593")
+        fill(50, 535, 10, 95,"#093593")
+        fill(100, 535, 10, 95,"#093593")
+        fill(50,625,60,10, "#093593")
+        // fourth row - second object - left vertical rectangle
+        fill(150, 425, 50, 10,"#093593")
+        fill(150, 425, 10, 150,"#093593")
+        fill(200, 425, 10, 150,"#093593")
+        fill(150,575,60,10, "#093593")
+        // fourth row - third object -lower middle t
+        fill(250, 500, 110, 10,"#093593")
+        fill(250, 550, 110, 10,"#093593")
+        fill(250, 500, 10, 50,"#093593")
+        fill(350,500,10,60, "#093593")
+        fill(280,550,10,75, "#093593")
+        fill(320,550,10,75, "#093593")
+        fill(280,625,50,10, "#093593")
+        // fourth row fourth object - vertical rectangle right side
+        fill(400, 425, 50, 10,"#093593")
+        fill(400, 425, 10, 150,"#093593")
+        fill(450, 425, 10, 150,"#093593")
+        fill(400,575,60,10, "#093593")
+        // fourth row fifth object small vertical rectangle rightside
+        fill(500, 535, 60, 10,"#093593")
+        fill(500, 535, 10, 95,"#093593")
+        fill(550, 535, 10, 95,"#093593")
+        fill(500,625,60,10, "#093593")
+
+
+        // bottom row - first object - left L
+        fill(50, 685, 155, 10,"#093593")
+        fill(50, 735, 155, 10,"#093593")
+        fill(50, 685, 10, 60,"#093593")
+        fill(200,685,10,60, "#093593")
+        fill(200,625,10,60, "#093593")
+        fill(150,625,10,60, "#093593")
+        fill(150,625,60,10, "#093593")
+
+        // bottom row - second object - middle rectangle
+        fill(275, 685, 50, 10,"#093593")
+        fill(275, 735, 50, 10,"#093593")
+        fill(275, 685, 10, 50,"#093593")
+        fill(325,685,10,60, "#093593")
+        // bottom row - third object - right L
+        fill(400, 685, 155, 10,"#093593")
+        fill(400, 735, 155, 10,"#093593")
+        fill(550, 685, 10, 60,"#093593")
+        fill(400,685,10,60, "#093593")
+        fill(400,625,10,60, "#093593")
+        fill(450,625,10,60, "#093593")
+        fill(400,625,60,10, "#093593")
 
 
 
@@ -221,18 +275,17 @@
 
 
 
-        // these are the top two short vertical lines.
-        fill(150, 0, 10, 75,"#093593")
-        fill(450, 0, 10, 75,"#093593")
-        // these are the bottom two short vertical lines
-        fill(150, 725, 10, 75,"#093593")
-        fill(450, 725, 10, 75,"#093593")
-        // These are the left most short hortizontal lines
-        fill(0, 150, 75, 10,"#093593")
-        fill(0, 650, 75, 10,"#093593")
-        //these are
-        fill(525, 150, 75,10,"#093593")
-        fill(525, 650, 75, 10,"#093593")
+
+
+        // // these are the bottom two short vertical lines
+        // // fill(150, 725, 10, 75,"#093593")
+        // // fill(450, 725, 10, 75,"#093593")
+        // // These are the left most short hortizontal lines
+        // fill(0, 150, 75, 10,"#093593")
+        // fill(0, 650, 75, 10,"#093593")
+        // //these are
+        // fill(525, 150, 75,10,"#093593")
+        // fill(525, 650, 75, 10,"#093593")
 
         fill(pacman.x, pacman.y, 25, 25, "yellow");//this is for the pacman
         fill(ghost1.x, ghost1.y, size, size, "red")

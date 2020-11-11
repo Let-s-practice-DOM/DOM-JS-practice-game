@@ -45,6 +45,7 @@
         x: 100,
         y: 100,
         track: function () {
+            //====to account for off screen movements
             if (this.x < 0) {
                 this.x = canvas.width;
             }
@@ -57,6 +58,10 @@
             if (this.y < 0) {
                 this.y = canvas.height;
             }
+            //==========================//
+
+
+
             if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
                 if(this.x > pacman.x){
                     this.x += moveSpeed;
@@ -77,6 +82,9 @@
             }
         }
     }
+
+
+
     //------made to compare the values easier in the best movement functions--------//
     function makePos(num){
         if(num < 0){
@@ -84,8 +92,7 @@
         }
         return num;
     }
-    //=========SEEMS TO BE BEST MOVEMENT IF IT IS TO CONTINUE TO THE LEFT AND THE Y MOVE WORKS WHEN IT IS GOING UP TO APPEAR AT THE BOTTOM=======//
-    //========MAY NEED TO WRITE 2 MORE FUNCTIONS FOR THE RIGHT AND DOWN MOVEMENTS==================//
+
     // this will set up for a preferred movement to go through the end of the map to come out the other side if it is a
     // shorter path to get to pacman rather than turning around
     function bestMovementX(ghostX, pacX, canvasW, base){
@@ -102,6 +109,9 @@
         return (possibleBestDistanceY < currentDistanceY)
 
     }
+
+
+
 
     //playerX, playerY, ghostX, ghostY, size
     // written in a way to allow any of the other ghost positions to be passed through for contact checking
@@ -133,6 +143,8 @@
     setInterval(logPositions, 1000);
 
 
+
+    //=====create pacman, canvas, walls, and ghosts
     function draw(){
         fill(0,0, canvas.width, canvas.height, "black"); //This is for canvas
 
@@ -213,30 +225,8 @@
         fill(500,425,100,10, "#093593")
         fill(500,425,10,60, "#093593")
 
-
-
-
-
-
-
-
-
-
-        // // these are the top two short vertical lines.
-        // fill(150, 0, 10, 75,"#093593")
-        // fill(450, 0, 10, 75,"#093593")
-        // // these are the bottom two short vertical lines
-        // fill(150, 725, 10, 75,"#093593")
-        // fill(450, 725, 10, 75,"#093593")
-        // // These are the left most short hortizontal lines
-        // fill(0, 150, 75, 10,"#093593")
-        // fill(0, 650, 75, 10,"#093593")
-        // //these are
-        // fill(525, 150, 75,10,"#093593")
-        // fill(525, 650, 75, 10,"#093593")
-
-        fill(pacman.x, pacman.y, 25, 25, "yellow");//this is for the pacman
-        fill(ghost1.x, ghost1.y, size, size, "red")
+        fill(pacman.x, pacman.y, 25, 25, "yellow");
+        fill(ghost1.x, ghost1.y, size, size, "red");
     }
     function fill(x, y, w, h, c){
         context.fillStyle = c;
@@ -250,6 +240,14 @@
         context.stroke();
         context.fill();
     }
+    //=======================//
+
+
+
+
+
+
+
 
     // create food along x 130 and 480 top to bottom
     // at y 140 left to right
@@ -295,8 +293,6 @@
         generateFoodsSpotsRight();
         generateFoodsSpotsTop();
     }
-
-
 
 
     function createFoods(){

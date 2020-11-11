@@ -88,25 +88,19 @@
     //========MAY NEED TO WRITE 2 MORE FUNCTIONS FOR THE RIGHT AND DOWN MOVEMENTS==================//
     // this will set up for a preferred movement to go through the end of the map to come out the other side if it is a
     // shorter path to get to pacman rather than turning around
-    function bestMovementX(predatorX, preyX, canvasW, base){
-        let goOtherWayX = false;
-        let currentDistanceX = predatorX - preyX;
+    function bestMovementX(ghostX, pacX, canvasW, base){
+        let currentDistanceX = ghostX - pacX;
         currentDistanceX = makePos(currentDistanceX);
-        let possibleBestDistanceX = (makePos((base - predatorX)) + makePos((canvasW - preyX)));
-        if(possibleBestDistanceX < currentDistanceX){
-            goOtherWayX = true;
-        }
-        return goOtherWayX;
+        let possibleBestDistanceX = (makePos((base - ghostX)) + makePos((canvasW - pacX)));
+        return (possibleBestDistanceX < currentDistanceX)
+
     }
-    function bestMovementY(predatorY, preyY, canvasH, base){
-        let goOtherWayY = false;
-        let currentDistanceY = predatorY - preyY;
+    function bestMovementY(ghostY, pacY, canvasH, base){
+        let currentDistanceY = ghostY - pacY;
         currentDistanceY = makePos(currentDistanceY);
-        let possibleBestDistanceY = (makePos((base - predatorY)) + makePos((canvasH - preyY)));
-        if(possibleBestDistanceY < currentDistanceY){
-            goOtherWayY = true;
-        }
-        return goOtherWayY;
+        let possibleBestDistanceY = (makePos((base - ghostY)) + makePos((canvasH - pacY)));
+        return (possibleBestDistanceY < currentDistanceY)
+
     }
 
     //playerX, playerY, ghostX, ghostY, size
@@ -114,7 +108,7 @@
     function contact(px, py, gx, gy, s){
         if((px + s > gx && px < gx + s) &&(py + s > gy && py < gy + s)){
             //game will restart in some way
-            console.log("CONTACT");
+            // console.log("CONTACT");
         }
     }
     // tracking ran at a different interval to keep the ghost movements to a relatively slower speed
@@ -130,6 +124,13 @@
         draw();
         createFoods();
     }
+
+    //=======for debugging and help with adding features==========//
+    function logPositions(){
+        console.log(`pacman X pos: ${pacman.x}`);
+        console.log(`pacman Y pos: ${pacman.y}`);
+    }
+    setInterval(logPositions, 1000);
 
 
     function draw(){
@@ -221,18 +222,18 @@
 
 
 
-        // these are the top two short vertical lines.
-        fill(150, 0, 10, 75,"#093593")
-        fill(450, 0, 10, 75,"#093593")
-        // these are the bottom two short vertical lines
-        fill(150, 725, 10, 75,"#093593")
-        fill(450, 725, 10, 75,"#093593")
-        // These are the left most short hortizontal lines
-        fill(0, 150, 75, 10,"#093593")
-        fill(0, 650, 75, 10,"#093593")
-        //these are
-        fill(525, 150, 75,10,"#093593")
-        fill(525, 650, 75, 10,"#093593")
+        // // these are the top two short vertical lines.
+        // fill(150, 0, 10, 75,"#093593")
+        // fill(450, 0, 10, 75,"#093593")
+        // // these are the bottom two short vertical lines
+        // fill(150, 725, 10, 75,"#093593")
+        // fill(450, 725, 10, 75,"#093593")
+        // // These are the left most short hortizontal lines
+        // fill(0, 150, 75, 10,"#093593")
+        // fill(0, 650, 75, 10,"#093593")
+        // //these are
+        // fill(525, 150, 75,10,"#093593")
+        // fill(525, 650, 75, 10,"#093593")
 
         fill(pacman.x, pacman.y, 25, 25, "yellow");//this is for the pacman
         fill(ghost1.x, ghost1.y, size, size, "red")
@@ -249,26 +250,65 @@
         context.stroke();
         context.fill();
     }
-    //====assign the random numbers only one time on initial load;
-    let ranNumArr = [];
-    function generateFoodsSpots(){
-        for(let i = 0; i < 25; i++){
-            let ranX = Math.floor(Math.random() * 500) + 50;
-            let ranY = Math.floor(Math.random() * 700) + 50;
-            ranNumArr.push(ranX);
-            ranNumArr.push(ranY);
+
+    // create food along x 130 and 480 top to bottom
+    // at y 140 left to right
+
+    let leftFoodArr = [];
+    let rightFoodArr = [];
+    let topFoodArr = [];
+    function generateFoodsSpotsLeft(){
+        let ranY = 50;
+        for(let i = 0; i < 10; i++){
+            let foodX = 130;
+            leftFoodArr.push(foodX);
+            leftFoodArr.push(ranY);
+            ranY+=75;
         }
-        return ranNumArr;
+        return leftFoodArr;
     }
-    //to be ran only on initial load;
+    function generateFoodsSpotsRight(){
+        let ranY = 50;
+        for(let i = 0; i < 10; i++){
+            let foodX = 480;
+            rightFoodArr.push(foodX);
+            rightFoodArr.push(ranY);
+            ranY+=75;
+        }
+        return rightFoodArr;
+    }
+    function generateFoodsSpotsTop(){
+        let ranX = 50;
+        for(let i = 0; i < 10; i++){
+            let foodY = 140;
+            topFoodArr.push(ranX);
+            topFoodArr.push(foodY);
+            ranX+=55;
+        }
+        return topFoodArr;
+    }
+
+
+    //to be ran only on initial load to create the food;
     window.onload = function(){
-        generateFoodsSpots();
+        generateFoodsSpotsLeft();
+        generateFoodsSpotsRight();
+        generateFoodsSpotsTop();
     }
-    //-----drawing the food pellets around from the random numbers;
+
+
+
+
     function createFoods(){
         for(let i = 0; i < 25; i++){
-            for(let j = 0; j < ranNumArr.length; j+=2){
-                fillC(ranNumArr[j], ranNumArr[j+1], 5, "#ffffff");
+            for(let j = 0; j < leftFoodArr.length; j+=2){
+                fillC(leftFoodArr[j], leftFoodArr[j+1], 5, "#ffffff");
+            }
+            for(let j = 0; j < rightFoodArr.length; j+=2){
+                fillC(rightFoodArr[j], rightFoodArr[j+1], 5, "#ffffff");
+            }
+            for(let j = 0; j < topFoodArr.length; j+=2){
+                fillC(topFoodArr[j], topFoodArr[j+1], 5, "#ffffff");
             }
         }
     }

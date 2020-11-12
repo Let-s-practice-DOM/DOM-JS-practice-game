@@ -269,19 +269,18 @@
         fill(150,625,60,10, "#093593")
 
         // bottom row - second object - middle rectangle
-        fill(275, 685, 50, 10,"#093593")
-        fill(275, 735, 50, 10,"#093593")
-        fill(275, 685, 10, 50,"#093593")
-        fill(325,685,10,60, "#093593")
+        hollowFill(275, 685, 50, 10,"#093593")
+        hollowFill(275, 735, 50, 10,"#093593")
+        hollowFill(275, 685, 10, 50,"#093593")
+        hollowFill(325,685,10,60, "#093593")
         // bottom row - third object - right L
-        fill(400, 685, 155, 10,"#093593")
-        fill(400, 735, 155, 10,"#093593")
-        fill(550, 685, 10, 60,"#093593")
-        fill(400,685,10,60, "#093593")
-        fill(400,625,10,60, "#093593")
-        fill(450,625,10,60, "#093593")
-        fill(400,625,60,10, "#093593")
-
+        hollowFill(400, 685, 155, 10,"#093593")
+        hollowFill(400, 735, 155, 10,"#093593")
+        hollowFill(550, 685, 10, 60,"#093593")
+        hollowFill(400,685,10,60, "#093593")
+        hollowFill(400,625,10,60, "#093593")
+        hollowFill(450,625,10,60, "#093593")
+        hollowFill(400,625,60,10, "#093593")
 
 
 
@@ -304,6 +303,11 @@
     function fill(x, y, w, h, c){
         context.fillStyle = c;
         context.fillRect(x, y, w, h);
+    }
+
+    function hollowFill(x, y, w, h, c){
+        context.strokeStyle = c;
+        context.strokeRect(x, y, w, h);
     }
 
     function fillC(cX, cY, r, c){
@@ -330,7 +334,7 @@
     let topFoodArr = [];
     function generateFoodsSpotsLeft(){
         let ranY = 50;
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < 9; i++){
             let foodX = 130;
             leftFoodArr.push(foodX);
             leftFoodArr.push(ranY);
@@ -340,7 +344,7 @@
     }
     function generateFoodsSpotsRight(){
         let ranY = 50;
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < 9; i++){
             let foodX = 480;
             rightFoodArr.push(foodX);
             rightFoodArr.push(ranY);

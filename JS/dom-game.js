@@ -133,6 +133,7 @@
     function load (){
         draw();
         createFoods();
+        livesLeft();
     }
 
     //=======for debugging and help with adding features==========//
@@ -293,6 +294,9 @@
 
 
 
+
+
+
         fill(pacman.x, pacman.y, 25, 25, "yellow");
         fill(ghost1.x, ghost1.y, size, size, "red");
 
@@ -383,5 +387,23 @@
        const direction = e.key.replace("Arrow", "");
        pacman.move(direction);
     });
+//----------------------------//----------------------------//----------------------------//----------------------------
+
+//function for lives---PENDING
+
+    let livesLeftCounter=3;
+    function livesLeft() {
+            if (contact()) {
+                livesLeftCounter -= 1;
+            }
+        }
+    context.font="20px Arial";
+    context.fillText("LivesLeft:",450,780)
+    context.fillStyle="#FEF035"
+
+
+
+
+
 
 })();

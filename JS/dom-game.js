@@ -4,6 +4,7 @@
 
     let foodCount = document.getElementById("foodCount");
     let count = 0;
+    let livesLeftCounter=3;
 
 
     const size = 25;
@@ -285,7 +286,7 @@
     }
 
     // to be ran over and over
-    setInterval(load, 50);
+    setInterval(load, 100);
     function load (){
         draw();
         createFoods();
@@ -298,7 +299,7 @@
         console.log(`pacman X pos: ${pacman.x}`);
         console.log(`pacman Y pos: ${pacman.y}`);
     }
-    setInterval(logPositions, 1000);
+    // setInterval(logPositions, 1000);
 
 
 
@@ -454,6 +455,8 @@
 
 
         fill(pacman.x, pacman.y, 25, 25, "yellow");
+        context.font="20px Arial";
+        context.fillText(`Lives left: ${livesLeftCounter}`,490,20)
         fill(ghost1.x, ghost1.y, size, size, ghost1.c);
         fill(ghost2.x, ghost2.y, size, size, ghost2.c);
         fill(ghost3.x, ghost3.y, size, size, ghost3.c);
@@ -497,6 +500,7 @@
     let leftFoodArr = [];
     let rightFoodArr = [];
     let topFoodArr = [];
+    let bottomFoodArr = [];
     let allFoods = [];
     function generateFoodsSpotsLeft(){
         let ranY = 50;
@@ -535,12 +539,27 @@
         return topFoodArr;
     }
 
+    function generateFoodsSpotBottom(){
+        let ranX = 50;
+        for(let i = 0; i < 10; i++){
+            let foodY = 770;
+            topFoodArr.push(ranX);
+            topFoodArr.push(foodY);
+            allFoods.push(ranX);
+            allFoods.push(foodY);
+            ranX+=55;
+        }
+        return bottomFoodArr;
+    }
+
 
     function eatFoods(px, py, s, arr){
         for(let i = 0; i < arr.length; i+=2){
             let x = arr[i];
             let y = arr[i + 1];
             if((px < x && px + s > x) && (py < y && py + s > y)){
+                // arr.splice(arr[i], 2);
+                // console.log(arr);
                 count++;
             }
         }
@@ -552,14 +571,9 @@
     //to be ran only on initial load to create the food;
     window.onload = function(){
         generateFoodsSpotsLeft();
-        console.log("LEFT FOODS")
-        console.log(leftFoodArr);
         generateFoodsSpotsRight();
-        console.log("RIGHT FOODS")
-        console.log(rightFoodArr);
         generateFoodsSpotsTop();
-        console.log("TOP FOODS")
-        console.log(topFoodArr);
+        generateFoodsSpotBottom();
     }
 
 
@@ -574,6 +588,9 @@
             for(let j = 0; j < topFoodArr.length; j+=2){
                 fillC(topFoodArr[j], topFoodArr[j+1], 5, "#ffffff");
             }
+            for(let j = 0; j < bottomFoodArr.length; j+=2){
+                fillC(bottomFoodArr[j], bottomFoodArr[j+1], 5, "#ffffff");
+            }
         }
     }
 
@@ -582,15 +599,12 @@
 
 //function for lives---PENDING
 
-    let livesLeftCounter=3;
     function livesLeft() {
             if (contact()) {
                 livesLeftCounter -= 1;
             }
         }
-    context.font="20px Arial";
-    context.fillText("LivesLeft:",450,780)
-    context.fillStyle="#FEF035"
+
 
 
 

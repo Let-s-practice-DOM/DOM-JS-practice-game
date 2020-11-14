@@ -8,10 +8,12 @@
 
 
     const size = 25;
+    const eyes = 5;
     const moveSpeed = 10;
     const pacman = {
         x: 20,
         y: 20,
+        r: 18,
         move: function (direction){
             if(allowMovements(this.x, this.y)){
                 switch (direction) {
@@ -49,8 +51,8 @@
     }
     // will make more ghost later
     const ghost1 = {
-        x: 100,
-        y: 100,
+        x: 320,
+        y: 410,
         c: "#d42c2c",
         track: function () {
             //====to account for off screen movements
@@ -175,7 +177,7 @@
         }
     }
     const ghost4 = {
-        x: 300,
+        x: 280,
         y: 410,
         c: "#73d228",
         track: function () {
@@ -477,13 +479,21 @@
 
 
 
-        fill(pacman.x, pacman.y, 25, 25, "yellow");
+        fill(pacman.x, pacman.y, size, size, "yellow");
         context.font="20px Arial";
         context.fillText(`Lives left: ${livesLeftCounter}`,490,20)
         fill(ghost1.x, ghost1.y, size, size, ghost1.c);
+        fill(ghost1.x + size/4.25, ghost1.y + size/4, eyes, eyes, "#ffffff");
+        fill(ghost1.x + size/1.5, ghost1.y + size/4, eyes, eyes, "#ffffff");
         fill(ghost2.x, ghost2.y, size, size, ghost2.c);
+        fill(ghost2.x + size/4.25, ghost2.y + size/4, eyes, eyes, "#ffffff");
+        fill(ghost2.x + size/1.5, ghost2.y + size/4, eyes, eyes, "#ffffff");
         fill(ghost3.x, ghost3.y, size, size, ghost3.c);
+        fill(ghost3.x + size/4.25, ghost3.y + size/4, eyes, eyes, "#ffffff");
+        fill(ghost3.x + size/1.5, ghost3.y + size/4, eyes, eyes, "#ffffff");
         fill(ghost4.x, ghost4.y, size, size, ghost4.c);
+        fill(ghost4.x + size/4.25, ghost4.y + size/4, eyes, eyes, "#ffffff");
+        fill(ghost4.x + size/1.5, ghost4.y + size/4, eyes, eyes, "#ffffff");
 
     }
     function fill(x, y, w, h, c){

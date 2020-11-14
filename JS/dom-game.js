@@ -247,18 +247,18 @@
     }
 
     //===========WHAT I WAS THINKING FOR THE MOVE LOGIC AROUND WALLS FOR NOW===============//
-    function allowMovements(px, py){
+    function allowMovements(x, y){
         let noWall = false;
-        if(px >= 0 && px <= 20 && py <= 270){
+        if(x >= 0 && x <= 20 && y <= 270){
             noWall = true;
         }
-        if(px >= 110 && px <= 120 && py <= 660){
+        if(x >= 110 && x <= 120 && y <= 660){
             noWall = true;
         }
-        if(px <= 120 && py <= 20){
+        if(x <= 120 && y <= 20){
             noWall = true;
         }
-        if(py >= 120 && py <= 130){
+        if(y >= 120 && y <= 130){
             noWall = true;
         }
 
@@ -284,7 +284,13 @@
     setInterval(tracking, 350);
     function tracking(){
         ghost1.track();
+        ghost2.track();
+        ghost3.track();
+        ghost4.track();
         contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size, pacman.r);
+        contact(pacman.x, pacman.y, ghost2.x, ghost2.y, size, pacman.r);
+        contact(pacman.x, pacman.y, ghost3.x, ghost3.y, size, pacman.r);
+        contact(pacman.x, pacman.y, ghost4.x, ghost4.y, size, pacman.r);
     }
 
     // to be ran over and over
@@ -301,7 +307,7 @@
         console.log(`pacman X pos: ${pacman.x}`);
         console.log(`pacman Y pos: ${pacman.y}`);
     }
-    setInterval(logPositions, 1000);
+    // setInterval(logPositions, 1000);
 
 
 

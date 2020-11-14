@@ -2,41 +2,47 @@
     const canvas = document.getElementById("pacMan");
     const context = canvas.getContext("2d");
 
+    let foodCount = document.getElementById("foodCount");
+    let count = 0;
+
+
     const size = 25;
     const moveSpeed = 10;
     const pacman = {
-        x: 50,
-        y: 50,
+        x: 20,
+        y: 20,
         move: function (direction){
-            switch (direction){
-                case "Up":
-                    if(this.y < 0) {
-                        this.y = canvas.height;
-                    } else {
-                        this.y -= moveSpeed;
-                    }
-                    break;
-                case "Down":
-                    if(this.y > canvas.height) {
-                        this.y = 0;
-                    } else {
-                        this.y += moveSpeed;
-                    }
-                    break;
-                case "Left":
-                    if(this.x < 0) {
-                       this.x = canvas.width;
-                    } else {
-                        this.x -= moveSpeed;
-                    }
-                    break;
-                case "Right":
-                    if(this.x > canvas.width){
-                        this.x= 0;
-                    } else {
-                        this.x += moveSpeed;
-                    }
-                    break;
+            if(allowMovements(this.x, this.y)){
+                switch (direction) {
+                    case "Up":
+                        if (this.y < 0) {
+                            this.y = canvas.height;
+                        } else {
+                            this.y -= moveSpeed;
+                        }
+                        break;
+                    case "Down":
+                        if (this.y > canvas.height) {
+                            this.y = 0;
+                        } else {
+                            this.y += moveSpeed;
+                        }
+                        break;
+                    case "Left":
+                        if (this.x < 0) {
+                            this.x = canvas.width;
+                        } else {
+                            this.x -= moveSpeed;
+                        }
+                        break;
+                    case "Right":
+                        if (this.x > canvas.width) {
+                            this.x = 0;
+                        } else {
+                            this.x += moveSpeed;
+                        }
+                        break;
+                }
             }
         }
     }
@@ -44,6 +50,133 @@
     const ghost1 = {
         x: 100,
         y: 100,
+        c: "#d42c2c",
+        track: function () {
+            //====to account for off screen movements
+            if (this.x < 0) {
+                this.x = canvas.width;
+            }
+            if (this.x > canvas.width) {
+                this.x = 0;
+            }
+            if (this.y > canvas.height) {
+                this.y = 0;
+            }
+            if (this.y < 0) {
+                this.y = canvas.height;
+            }
+            //==========================//
+
+
+
+            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
+                if(this.x > pacman.x){
+                    this.x += moveSpeed;
+                } else this.x -= moveSpeed;
+            } else {
+                if(this.x > pacman.x){
+                    this.x -= moveSpeed;
+                } else this.x += moveSpeed;
+            }
+            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
+                if(this.y > pacman.y){
+                    this.y += moveSpeed;
+                } else this.y -= moveSpeed;
+            } else {
+                if(this.y > pacman.y){
+                    this.y -= moveSpeed;
+                } else this.y += moveSpeed;
+            }
+        }
+    }
+    const ghost2 = {
+        x: 270,
+        y: 370,
+        c: "#9829cf",
+        track: function () {
+            //====to account for off screen movements
+            if (this.x < 0) {
+                this.x = canvas.width;
+            }
+            if (this.x > canvas.width) {
+                this.x = 0;
+            }
+            if (this.y > canvas.height) {
+                this.y = 0;
+            }
+            if (this.y < 0) {
+                this.y = canvas.height;
+            }
+            //==========================//
+
+
+
+            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
+                if(this.x > pacman.x){
+                    this.x += moveSpeed;
+                } else this.x -= moveSpeed;
+            } else {
+                if(this.x > pacman.x){
+                    this.x -= moveSpeed;
+                } else this.x += moveSpeed;
+            }
+            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
+                if(this.y > pacman.y){
+                    this.y += moveSpeed;
+                } else this.y -= moveSpeed;
+            } else {
+                if(this.y > pacman.y){
+                    this.y -= moveSpeed;
+                } else this.y += moveSpeed;
+            }
+        }
+    }
+    const ghost3 = {
+        x: 320,
+        y: 370,
+        c: "#e6510a",
+        track: function () {
+            //====to account for off screen movements
+            if (this.x < 0) {
+                this.x = canvas.width;
+            }
+            if (this.x > canvas.width) {
+                this.x = 0;
+            }
+            if (this.y > canvas.height) {
+                this.y = 0;
+            }
+            if (this.y < 0) {
+                this.y = canvas.height;
+            }
+            //==========================//
+
+
+
+            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
+                if(this.x > pacman.x){
+                    this.x += moveSpeed;
+                } else this.x -= moveSpeed;
+            } else {
+                if(this.x > pacman.x){
+                    this.x -= moveSpeed;
+                } else this.x += moveSpeed;
+            }
+            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
+                if(this.y > pacman.y){
+                    this.y += moveSpeed;
+                } else this.y -= moveSpeed;
+            } else {
+                if(this.y > pacman.y){
+                    this.y -= moveSpeed;
+                } else this.y += moveSpeed;
+            }
+        }
+    }
+    const ghost4 = {
+        x: 300,
+        y: 410,
+        c: "#73d228",
         track: function () {
             //====to account for off screen movements
             if (this.x < 0) {
@@ -110,6 +243,29 @@
 
     }
 
+    //===========WHAT I WAS THINKING FOR THE MOVE LOGIC AROUND WALLS FOR NOW===============//
+    function allowMovements(px, py){
+        let noWall = false;
+        if(px >= 0 && px <= 20 && py <= 270){
+            noWall = true;
+        }
+        if(px >= 110 && px <= 120 && py <= 660){
+            noWall = true;
+        }
+        if(px <= 120 && py <= 20){
+            noWall = true;
+        }
+        if(py >= 120 && py <= 130){
+            noWall = true;
+        }
+
+
+
+
+
+        noWall = true;
+        return noWall;
+    }
 
 
 
@@ -134,6 +290,7 @@
         draw();
         createFoods();
         livesLeft();
+        eatFoods(pacman.x, pacman.y, size, allFoods);
     }
 
     //=======for debugging and help with adding features==========//
@@ -269,18 +426,18 @@
         fill(150,625,60,10, "#093593")
 
         // bottom row - second object - middle rectangle
-        hollowFill(275, 685, 50, 10,"#093593")
-        hollowFill(275, 735, 50, 10,"#093593")
-        hollowFill(275, 685, 10, 50,"#093593")
-        hollowFill(325,685,10,60, "#093593")
+        fill(275, 685, 50, 10,"#093593")
+        fill(275, 735, 50, 10,"#093593")
+        fill(275, 685, 10, 50,"#093593")
+        fill(325,685,10,60, "#093593")
         // bottom row - third object - right L
-        hollowFill(400, 685, 155, 10,"#093593")
-        hollowFill(400, 735, 155, 10,"#093593")
-        hollowFill(550, 685, 10, 60,"#093593")
-        hollowFill(400,685,10,60, "#093593")
-        hollowFill(400,625,10,60, "#093593")
-        hollowFill(450,625,10,60, "#093593")
-        hollowFill(400,625,60,10, "#093593")
+        fill(400, 685, 155, 10,"#093593")
+        fill(400, 735, 155, 10,"#093593")
+        fill(550, 685, 10, 60,"#093593")
+        fill(400,685,10,60, "#093593")
+        fill(400,625,10,60, "#093593")
+        fill(450,625,10,60, "#093593")
+        fill(400,625,60,10, "#093593")
 
 
 
@@ -297,7 +454,10 @@
 
 
         fill(pacman.x, pacman.y, 25, 25, "yellow");
-        fill(ghost1.x, ghost1.y, size, size, "red");
+        fill(ghost1.x, ghost1.y, size, size, ghost1.c);
+        fill(ghost2.x, ghost2.y, size, size, ghost2.c);
+        fill(ghost3.x, ghost3.y, size, size, ghost3.c);
+        fill(ghost4.x, ghost4.y, size, size, ghost4.c);
 
     }
     function fill(x, y, w, h, c){
@@ -320,7 +480,12 @@
     //=======================//
 
 
-
+    //for movement
+    window.addEventListener("keydown", function (e){
+        const direction = e.key.replace("Arrow", "");
+        e.preventDefault();
+        pacman.move(direction);
+    });
 
 
 
@@ -332,12 +497,15 @@
     let leftFoodArr = [];
     let rightFoodArr = [];
     let topFoodArr = [];
+    let allFoods = [];
     function generateFoodsSpotsLeft(){
         let ranY = 50;
         for(let i = 0; i < 9; i++){
             let foodX = 130;
             leftFoodArr.push(foodX);
             leftFoodArr.push(ranY);
+            allFoods.push(foodX);
+            allFoods.push(ranY);
             ranY+=75;
         }
         return leftFoodArr;
@@ -348,6 +516,8 @@
             let foodX = 480;
             rightFoodArr.push(foodX);
             rightFoodArr.push(ranY);
+            allFoods.push(foodX);
+            allFoods.push(ranY);
             ranY+=75;
         }
         return rightFoodArr;
@@ -358,17 +528,38 @@
             let foodY = 140;
             topFoodArr.push(ranX);
             topFoodArr.push(foodY);
+            allFoods.push(ranX);
+            allFoods.push(foodY);
             ranX+=55;
         }
         return topFoodArr;
     }
 
 
+    function eatFoods(px, py, s, arr){
+        for(let i = 0; i < arr.length; i+=2){
+            let x = arr[i];
+            let y = arr[i + 1];
+            if((px < x && px + s > x) && (py < y && py + s > y)){
+                count++;
+            }
+        }
+        foodCount.innerText = count;
+    }
+
+
+
     //to be ran only on initial load to create the food;
     window.onload = function(){
         generateFoodsSpotsLeft();
+        console.log("LEFT FOODS")
+        console.log(leftFoodArr);
         generateFoodsSpotsRight();
+        console.log("RIGHT FOODS")
+        console.log(rightFoodArr);
         generateFoodsSpotsTop();
+        console.log("TOP FOODS")
+        console.log(topFoodArr);
     }
 
 
@@ -386,11 +577,7 @@
         }
     }
 
-    //for movement
-    window.addEventListener("keydown", function (e){
-       const direction = e.key.replace("Arrow", "");
-       pacman.move(direction);
-    });
+
 //----------------------------//----------------------------//----------------------------//----------------------------
 
 //function for lives---PENDING

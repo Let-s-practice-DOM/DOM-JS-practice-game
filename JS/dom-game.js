@@ -309,28 +309,51 @@
 
 
         // top row 1st square
-        fill(45, 45, 55, 10,"#093593")
-        fill(45, 110, 55, 10,"#093593")
-        fill(45, 45, 10, 75,"#093593")
-        fill(100,45,10,75, "#093593")
+        fill(45, 45, 55, 2,"#093593")
+        fill(45, 118, 55, 2,"#093593")
+        fill(45, 45, 2, 75,"#093593")
+        fill(100,45,2,75, "#093593")
+        // top row 1st square inner
+        fill(52, 50, 43, 8,"#093593")
+        fill(52, 105, 43, 8,"#093593")
+        fill(52, 50, 8, 62,"#093593")
+        fill(88,50,8,62, "#093593")
 
         // Top row - second object - short vertical line
-        fill(150, 0, 10, 75,"#093593")
+        fill(145, 0, 2, 84,"#093593")
+        fill(150, 0, 8, 80,"#093593")
+        fill(161, 0, 2, 84,"#093593")
+        fill(145, 82, 18, 2,"#093593")
 
-        // top row second object - middle rectangle
-        fill(200, 45, 200, 10,"#093593")
-        fill(200, 110, 200, 10,"#093593")
-        fill(200, 45, 10, 75,"#093593")
-        fill(400, 45, 10, 75,"#093593")
+        // top row second object - middle rectangle - outer thin layer
+        fill(200, 45, 200, 2,"#093593")
+        fill(200, 118, 200, 2,"#093593")
+        fill(200, 45, 2, 75,"#093593")
+        fill(400, 45, 2, 75,"#093593")
+        // top row second object - middle rectangle - inner thick layer
+        fill(207, 50, 189, 8,"#093593")
+        fill(207, 105, 189, 8,"#093593")
+        fill(207, 50, 8, 62,"#093593")
+        fill(389, 50, 8, 62,"#093593")
 
         // Top row - fourth object - short vertical line
-        fill(450, 0, 10, 75,"#093593")
+        fill(450, 0, 8, 80,"#093593")
+        fill(445, 0, 2, 84,"#093593")
+        fill(461, 0, 2, 84,"#093593")
+        fill(445, 82, 18, 2,"#093593")
+        // // top row fifth object fourth square - outer
 
-        // // top row fifth object fourth square
-        fill(500, 45, 65, 10,"#093593")
-        fill(500, 110, 65, 10,"#093593")
-        fill(555, 45, 10, 75,"#093593")
-        fill(500, 45, 10, 75,"#093593")
+        fill(503, 45, 55, 2,"#093593")
+        fill(503, 118, 55, 2,"#093593")
+        fill(558, 45, 2, 75,"#093593")
+        fill(503,45,2,75, "#093593")
+        // // top row fifth object fourth square - inner thick
+        fill(510, 50, 43, 8,"#093593")
+        fill(510, 105, 43, 8,"#093593")
+        fill(545, 50, 8, 62,"#093593")
+        fill(510,50,8,62, "#093593")
+
+
 
         // second row first object - small square on left
         fill(45, 160, 65, 10,"#093593")

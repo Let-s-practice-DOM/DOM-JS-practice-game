@@ -11,7 +11,7 @@
     const eyes = 5;
     const moveSpeed = 10;
     const pacman = {
-        x: 20,
+        x: 25,
         y: 20,
         r: 18,
         move: function (direction){
@@ -73,20 +73,20 @@
 
 
             if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x += moveSpeed;
                 } else this.x -= moveSpeed;
             } else {
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x -= moveSpeed;
                 } else this.x += moveSpeed;
             }
             if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y += moveSpeed;
                 } else this.y -= moveSpeed;
             } else {
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y -= moveSpeed;
                 } else this.y += moveSpeed;
             }
@@ -115,20 +115,20 @@
 
 
             if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x += moveSpeed;
                 } else this.x -= moveSpeed;
             } else {
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x -= moveSpeed;
                 } else this.x += moveSpeed;
             }
             if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y += moveSpeed;
                 } else this.y -= moveSpeed;
             } else {
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y -= moveSpeed;
                 } else this.y += moveSpeed;
             }
@@ -157,20 +157,20 @@
 
 
             if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x += moveSpeed;
                 } else this.x -= moveSpeed;
             } else {
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x -= moveSpeed;
                 } else this.x += moveSpeed;
             }
             if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y += moveSpeed;
                 } else this.y -= moveSpeed;
             } else {
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y -= moveSpeed;
                 } else this.y += moveSpeed;
             }
@@ -199,20 +199,20 @@
 
 
             if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x += moveSpeed;
                 } else this.x -= moveSpeed;
             } else {
-                if(this.x > pacman.x){
+                if(this.x > pacman.x - pacman.r){
                     this.x -= moveSpeed;
                 } else this.x += moveSpeed;
             }
             if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y += moveSpeed;
                 } else this.y -= moveSpeed;
             } else {
-                if(this.y > pacman.y){
+                if(this.y > pacman.y - pacman.r){
                     this.y -= moveSpeed;
                 } else this.y += moveSpeed;
             }
@@ -274,8 +274,8 @@
 
     //playerX, playerY, ghostX, ghostY, size
     // written in a way to allow any of the other ghost positions to be passed through for contact checking
-    function contact(px, py, gx, gy, s){
-        if((px + s > gx && px < gx + s) &&(py + s > gy && py < gy + s)){
+    function contact(px, py, gx, gy, gs, pr){
+        if((px + pr > gx && px < gx + gs) &&(py + pr > gy && py < gy + gs)){
             //game will restart in some way
             // console.log("CONTACT");
         }
@@ -284,7 +284,7 @@
     setInterval(tracking, 350);
     function tracking(){
         ghost1.track();
-        contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size);
+        contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size, pacman.r);
     }
 
     // to be ran over and over
@@ -293,7 +293,7 @@
         draw();
         createFoods();
         livesLeft();
-        eatFoods(pacman.x, pacman.y, size, allFoods);
+        eatFoods(pacman.x, pacman.y, pacman.r, allFoods);
     }
 
     //=======for debugging and help with adding features==========//
@@ -301,7 +301,7 @@
         console.log(`pacman X pos: ${pacman.x}`);
         console.log(`pacman Y pos: ${pacman.y}`);
     }
-    // setInterval(logPositions, 1000);
+    setInterval(logPositions, 1000);
 
 
 
@@ -477,9 +477,9 @@
 
 
 
+        hollowFill(350, 730, 30, 30, "#093593");
 
-
-        fill(pacman.x, pacman.y, size, size, "yellow");
+        fillC(pacman.x, pacman.y, pacman.r, "yellow");
         context.font="20px Arial";
         context.fillText(`Lives left: ${livesLeftCounter}`,490,20)
         fill(ghost1.x, ghost1.y, size, size, ghost1.c);
@@ -501,11 +501,6 @@
         context.fillRect(x, y, w, h);
     }
 
-    function hollowFill(x, y, w, h, c){
-        context.strokeStyle = c;
-        context.strokeRect(x, y, w, h);
-    }
-
     function fillC(cX, cY, r, c){
         context.fillStyle = c;
         context.beginPath();
@@ -513,6 +508,12 @@
         context.stroke();
         context.fill();
     }
+    function hollowFill(x, y, w, h, c){
+        context.strokeStyle = c;
+        context.lineWidth = 5;
+        context.strokeRect(x, y, w, h);
+    }
+
     //=======================//
 
 
@@ -590,7 +591,7 @@
         for(let i = 0; i < arr.length; i+=2){
             let x = arr[i];
             let y = arr[i + 1];
-            if((px < x && px + s > x) && (py < y && py + s > y)){
+            if((px + s > x && px - s < x) && (py + s > y && py - s < y)){
                 // arr.splice(arr[i], 2);
                 // console.log(arr);
                 count++;

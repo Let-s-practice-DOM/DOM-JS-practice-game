@@ -247,18 +247,18 @@
     }
 
     //===========WHAT I WAS THINKING FOR THE MOVE LOGIC AROUND WALLS FOR NOW===============//
-    function allowMovements(px, py){
+    function allowMovements(x, y){
         let noWall = false;
-        if(px >= 0 && px <= 20 && py <= 270){
+        if(x >= 0 && x <= 20 && y <= 270){
             noWall = true;
         }
-        if(px >= 110 && px <= 120 && py <= 660){
+        if(x >= 110 && x <= 120 && y <= 660){
             noWall = true;
         }
-        if(px <= 120 && py <= 20){
+        if(x <= 120 && y <= 20){
             noWall = true;
         }
-        if(py >= 120 && py <= 130){
+        if(y >= 120 && y <= 130){
             noWall = true;
         }
 
@@ -281,10 +281,16 @@
         }
     }
     // tracking ran at a different interval to keep the ghost movements to a relatively slower speed
-    setInterval(tracking, 350);
+    // setInterval(tracking, 350);
     function tracking(){
         ghost1.track();
+        ghost2.track();
+        ghost3.track();
+        ghost4.track();
         contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size, pacman.r);
+        contact(pacman.x, pacman.y, ghost2.x, ghost2.y, size, pacman.r);
+        contact(pacman.x, pacman.y, ghost3.x, ghost3.y, size, pacman.r);
+        contact(pacman.x, pacman.y, ghost4.x, ghost4.y, size, pacman.r);
     }
 
     // to be ran over and over
@@ -301,7 +307,7 @@
         console.log(`pacman X pos: ${pacman.x}`);
         console.log(`pacman Y pos: ${pacman.y}`);
     }
-    setInterval(logPositions, 1000);
+    // setInterval(logPositions, 1000);
 
 
 
@@ -477,7 +483,6 @@
 
 
 
-        hollowFill(350, 730, 30, 30, "#093593");
 
         fillC(pacman.x, pacman.y, pacman.r, "yellow");
         context.font="20px Arial";
@@ -519,8 +524,10 @@
 
     //for movement
     window.addEventListener("keydown", function (e){
+        if(e.key.includes("Arrow")){
+            e.preventDefault();
+        }
         const direction = e.key.replace("Arrow", "");
-        e.preventDefault();
         pacman.move(direction);
     });
 
@@ -528,35 +535,123 @@
 
 
 
-    // create food along x 130 and 480 top to bottom
-    // at y 140 left to right
-
     let leftFoodArr = [];
     let rightFoodArr = [];
     let topFoodArr = [];
     let bottomFoodArr = [];
+    let topLFoodArr = [];
+    let topRFoodArr = [];
+    let bottomLFoodArr = [];
+    let bottomRFoodArr = [];
+    let middleLFA = [];
+    let middleRFA = [];
+    let topMFA = [];
     let allFoods = [];
-    function generateFoodsSpotsLeft(){
-        let ranY = 50;
+    function tMF(){
+        let x = 180;
+        let y = 20;
+        for(let i = 0; i < 5; i++){
+            topMFA.push(x);
+            topMFA.push(y);
+            allFoods.push(x);
+            allFoods.push(y);
+            x+=60;
+        }
+        return topMFA;
+    }
+    function mLF(){
+        let x = 225;
+        let y = 180;
         for(let i = 0; i < 9; i++){
-            let foodX = 130;
+            middleLFA.push(x);
+            middleLFA.push(y);
+            allFoods.push(x);
+            allFoods.push(y);
+            y+=70;
+        }
+        return middleLFA;
+    }
+    function mRF(){
+        let x = 380;
+        let y = 180;
+        for(let i = 0; i < 9; i++){
+            middleRFA.push(x);
+            middleRFA.push(y);
+            allFoods.push(x);
+            allFoods.push(y);
+            y+=70;
+        }
+        return middleRFA;
+    }
+    function bLFood(){
+        let x = 20;
+        let y = 510;
+        for(let i = 0; i < 4; i++){
+            bottomLFoodArr.push(x);
+            bottomLFoodArr.push(y);
+            allFoods.push(x);
+            allFoods.push(y);
+            y+=70;
+        }
+        return bottomLFoodArr;
+    }
+    function bRFood(){
+        let x = 580;
+        let y = 510;
+        for(let i = 0; i < 4; i++){
+            bottomRFoodArr.push(x);
+            bottomRFoodArr.push(y);
+            allFoods.push(x);
+            allFoods.push(y);
+            y+=70;
+        }
+        return bottomRFoodArr;
+    }
+    function topLeftFood(){
+        let x = 20;
+        let y = 25;
+        for(let i = 0; i < 4; i++){
+            topLFoodArr.push(x);
+            topLFoodArr.push(y);
+            allFoods.push(x);
+            allFoods.push(y);
+            y+=70;
+        }
+        return topLFoodArr;
+    }
+    function topRightFood(){
+        let x = 580;
+        let y = 25;
+        for(let i = 0; i < 4; i++){
+            topRFoodArr.push(x);
+            topRFoodArr.push(y);
+            allFoods.push(x);
+            allFoods.push(y);
+            y+=70;
+        }
+        return topRFoodArr;
+    }
+    function generateFoodsSpotsLeft(){
+        let ranY = 20;
+        let foodX = 130;
+        for(let i = 0; i < 10; i++){
             leftFoodArr.push(foodX);
             leftFoodArr.push(ranY);
             allFoods.push(foodX);
             allFoods.push(ranY);
-            ranY+=75;
+            ranY+=70;
         }
         return leftFoodArr;
     }
     function generateFoodsSpotsRight(){
-        let ranY = 50;
-        for(let i = 0; i < 9; i++){
+        let ranY = 20;
+        for(let i = 0; i < 10; i++){
             let foodX = 480;
             rightFoodArr.push(foodX);
             rightFoodArr.push(ranY);
             allFoods.push(foodX);
             allFoods.push(ranY);
-            ranY+=75;
+            ranY+=70;
         }
         return rightFoodArr;
     }
@@ -592,8 +687,7 @@
             let x = arr[i];
             let y = arr[i + 1];
             if((px + s > x && px - s < x) && (py + s > y && py - s < y)){
-                // arr.splice(arr[i], 2);
-                // console.log(arr);
+                arr.splice(arr[i], 2);
                 count++;
             }
         }
@@ -608,23 +702,19 @@
         generateFoodsSpotsRight();
         generateFoodsSpotsTop();
         generateFoodsSpotBottom();
+        topLeftFood();
+        topRightFood();
+        bRFood();
+        bLFood();
+        mRF();
+        mLF();
+        tMF();
     }
 
 
     function createFoods(){
-        for(let i = 0; i < 10; i++){
-            for(let j = 0; j < leftFoodArr.length; j+=2){
-                fillC(leftFoodArr[j], leftFoodArr[j+1], 5, "#ffffff");
-            }
-            for(let j = 0; j < rightFoodArr.length; j+=2){
-                fillC(rightFoodArr[j], rightFoodArr[j+1], 5, "#ffffff");
-            }
-            for(let j = 0; j < topFoodArr.length; j+=2){
-                fillC(topFoodArr[j], topFoodArr[j+1], 5, "#ffffff");
-            }
-            for(let j = 0; j < bottomFoodArr.length; j+=2){
-                fillC(bottomFoodArr[j], bottomFoodArr[j+1], 5, "#ffffff");
-            }
+        for(let i = 0; i < allFoods.length; i+=2){
+            fillC(allFoods[i], allFoods[i+1], 4, "#ffffff");
         }
     }
 

@@ -266,7 +266,9 @@
 
 
 
+        //added temporarily until logic is figured out
         noWall = true;
+        //=========//
         return noWall;
     }
 
@@ -276,21 +278,38 @@
     // written in a way to allow any of the other ghost positions to be passed through for contact checking
     function contact(px, py, gx, gy, gs, pr){
         if((px + pr > gx && px < gx + gs) &&(py + pr > gy && py < gy + gs)){
+            return true;
             //game will restart in some way
             // console.log("CONTACT");
         }
     }
     // tracking ran at a different interval to keep the ghost movements to a relatively slower speed
-    // setInterval(tracking, 350);
+    setInterval(tracking, 350);
     function tracking(){
         ghost1.track();
         ghost2.track();
         ghost3.track();
         ghost4.track();
-        contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size, pacman.r);
-        contact(pacman.x, pacman.y, ghost2.x, ghost2.y, size, pacman.r);
-        contact(pacman.x, pacman.y, ghost3.x, ghost3.y, size, pacman.r);
-        contact(pacman.x, pacman.y, ghost4.x, ghost4.y, size, pacman.r);
+        if(contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size, pacman.r)){
+            ghost1.x = 320;
+            ghost1.y = 410;
+            livesLeftCounter -= 1;
+        }
+        if(contact(pacman.x, pacman.y, ghost2.x, ghost2.y, size, pacman.r)){
+            ghost2.x = 270;
+            ghost2.y = 370;
+            livesLeftCounter -= 1;
+        }
+        if(contact(pacman.x, pacman.y, ghost3.x, ghost3.y, size, pacman.r)){
+            ghost3.x = 320;
+            ghost3.y = 370;
+            livesLeftCounter -= 1;
+        }
+        if(contact(pacman.x, pacman.y, ghost4.x, ghost4.y, size, pacman.r)){
+            ghost4.x = 280;
+            ghost4.y = 410;
+            livesLeftCounter -= 1;
+        }
     }
 
     // to be ran over and over
@@ -486,7 +505,7 @@
 
         fillC(pacman.x, pacman.y, pacman.r, "yellow");
         context.font="20px Arial";
-        context.fillText(`Lives left: ${livesLeftCounter}`,490,20)
+        context.fillText(`Lives left: ${livesLeftCounter}`,480,20)
         fill(ghost1.x, ghost1.y, size, size, ghost1.c);
         fill(ghost1.x + size/4.25, ghost1.y + size/4, eyes, eyes, "#ffffff");
         fill(ghost1.x + size/1.5, ghost1.y + size/4, eyes, eyes, "#ffffff");
@@ -687,7 +706,8 @@
             let x = arr[i];
             let y = arr[i + 1];
             if((px + s > x && px - s < x) && (py + s > y && py - s < y)){
-                arr.splice(arr[i], 2);
+                arr.splice(arr.indexOf(i), 1);
+                arr.splice(arr.indexOf(i+1), 1);
                 count++;
             }
         }
@@ -719,9 +739,12 @@
     }
 
 
+
+
 //----------------------------//----------------------------//----------------------------//----------------------------
 
 //function for lives---PENDING
+    //MOVED INTO TRACKING CONTACT FUNCTION
 
     function livesLeft() {
             if (contact()) {

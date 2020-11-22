@@ -2,9 +2,16 @@
     const canvas = document.getElementById("pacMan");
     const context = canvas.getContext("2d");
 
+    let direction;
+
     let foodCount = document.getElementById("foodCount");
     let count = 0;
     let livesLeftCounter=3;
+
+    let ranNum1 = 0;
+    let ranNum2 = 0;
+    let ranNum3 = 0;
+    let ranNum4 = 0;
 
 
     const size = 25;
@@ -53,8 +60,9 @@
         x: 320,
         y: 410,
         c: "#d42c2c",
-        track: function () {
-            //====to account for off screen movements
+        travel: function () {
+            //========EVERY TIME THEY HIT A WALL PULL A NEW RANDOM NUMBER????
+            // let ranNum = ~~(Math.random()*4);
             if (this.x < 0) {
                 this.x = canvas.width;
             }
@@ -67,27 +75,14 @@
             if (this.y < 0) {
                 this.y = canvas.height;
             }
-            //==========================//
-
-
-
-            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x - pacman.r){
-                    this.x += moveSpeed;
-                } else this.x -= moveSpeed;
+            if(ranNum1 === 0){
+                this.y -= moveSpeed;
+            } else if(ranNum1 === 1){
+                this.x += moveSpeed;
+            } else if(ranNum1 === 2){
+                this.y += moveSpeed;
             } else {
-                if(this.x > pacman.x - pacman.r){
-                    this.x -= moveSpeed;
-                } else this.x += moveSpeed;
-            }
-            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y - pacman.r){
-                    this.y += moveSpeed;
-                } else this.y -= moveSpeed;
-            } else {
-                if(this.y > pacman.y - pacman.r){
-                    this.y -= moveSpeed;
-                } else this.y += moveSpeed;
+                this.x -= moveSpeed;
             }
         }
     }
@@ -95,8 +90,9 @@
         x: 270,
         y: 370,
         c: "#9829cf",
-        track: function () {
-            //====to account for off screen movements
+        travel: function () {
+            //========EVERY TIME THEY HIT A WALL PULL A NEW RANDOM NUMBER????
+            // let ranNum = ~~(Math.random()*4);
             if (this.x < 0) {
                 this.x = canvas.width;
             }
@@ -109,27 +105,14 @@
             if (this.y < 0) {
                 this.y = canvas.height;
             }
-            //==========================//
-
-
-
-            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x - pacman.r){
-                    this.x += moveSpeed;
-                } else this.x -= moveSpeed;
+            if(ranNum2 === 0){
+                this.y -= moveSpeed;
+            } else if(ranNum2 === 1){
+                this.x += moveSpeed;
+            } else if(ranNum2 === 2){
+                this.y += moveSpeed;
             } else {
-                if(this.x > pacman.x - pacman.r){
-                    this.x -= moveSpeed;
-                } else this.x += moveSpeed;
-            }
-            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y - pacman.r){
-                    this.y += moveSpeed;
-                } else this.y -= moveSpeed;
-            } else {
-                if(this.y > pacman.y - pacman.r){
-                    this.y -= moveSpeed;
-                } else this.y += moveSpeed;
+                this.x -= moveSpeed;
             }
         }
     }
@@ -137,8 +120,9 @@
         x: 320,
         y: 370,
         c: "#e6510a",
-        track: function () {
-            //====to account for off screen movements
+        travel: function () {
+            //========EVERY TIME THEY HIT A WALL PULL A NEW RANDOM NUMBER????
+            // let ranNum = ~~(Math.random()*4);
             if (this.x < 0) {
                 this.x = canvas.width;
             }
@@ -151,27 +135,14 @@
             if (this.y < 0) {
                 this.y = canvas.height;
             }
-            //==========================//
-
-
-
-            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x - pacman.r){
-                    this.x += moveSpeed;
-                } else this.x -= moveSpeed;
+            if(ranNum3 === 0){
+                this.y -= moveSpeed;
+            } else if(ranNum3 === 1){
+                this.x += moveSpeed;
+            } else if(ranNum3 === 2){
+                this.y += moveSpeed;
             } else {
-                if(this.x > pacman.x - pacman.r){
-                    this.x -= moveSpeed;
-                } else this.x += moveSpeed;
-            }
-            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y - pacman.r){
-                    this.y += moveSpeed;
-                } else this.y -= moveSpeed;
-            } else {
-                if(this.y > pacman.y - pacman.r){
-                    this.y -= moveSpeed;
-                } else this.y += moveSpeed;
+                this.x -= moveSpeed;
             }
         }
     }
@@ -179,8 +150,9 @@
         x: 280,
         y: 410,
         c: "#73d228",
-        track: function () {
-            //====to account for off screen movements
+        travel: function () {
+            //========EVERY TIME THEY HIT A WALL PULL A NEW RANDOM NUMBER????
+            // let ranNum = ~~(Math.random()*4);
             if (this.x < 0) {
                 this.x = canvas.width;
             }
@@ -193,57 +165,20 @@
             if (this.y < 0) {
                 this.y = canvas.height;
             }
-            //==========================//
-
-
-
-            if(bestMovementX(this.x, pacman.x, canvas.width, 0)){//need to account for walls later
-                if(this.x > pacman.x - pacman.r){
-                    this.x += moveSpeed;
-                } else this.x -= moveSpeed;
+            if(ranNum4 === 0){
+                this.y -= moveSpeed;
+            } else if(ranNum4 === 1){
+                this.x += moveSpeed;
+            } else if(ranNum4 === 2){
+                this.y += moveSpeed;
             } else {
-                if(this.x > pacman.x - pacman.r){
-                    this.x -= moveSpeed;
-                } else this.x += moveSpeed;
-            }
-            if(bestMovementY(this.y, pacman.y, canvas.height, 0)){// account for wall later
-                if(this.y > pacman.y - pacman.r){
-                    this.y += moveSpeed;
-                } else this.y -= moveSpeed;
-            } else {
-                if(this.y > pacman.y - pacman.r){
-                    this.y -= moveSpeed;
-                } else this.y += moveSpeed;
+                this.x -= moveSpeed;
             }
         }
     }
 
 
 
-    //------made to compare the values easier in the best movement functions--------//
-    function makePos(num){
-        if(num < 0){
-            return num * -1;
-        }
-        return num;
-    }
-
-    // this will set up for a preferred movement to go through the end of the map to come out the other side if it is a
-    // shorter path to get to pacman rather than turning around
-    function bestMovementX(ghostX, pacX, canvasW, base){
-        let currentDistanceX = ghostX - pacX;
-        currentDistanceX = makePos(currentDistanceX);
-        let possibleBestDistanceX = (makePos((base - ghostX)) + makePos((canvasW - pacX)));
-        return (possibleBestDistanceX < currentDistanceX)
-
-    }
-    function bestMovementY(ghostY, pacY, canvasH, base){
-        let currentDistanceY = ghostY - pacY;
-        currentDistanceY = makePos(currentDistanceY);
-        let possibleBestDistanceY = (makePos((base - ghostY)) + makePos((canvasH - pacY)));
-        return (possibleBestDistanceY < currentDistanceY)
-
-    }
 
     //===========WHAT I WAS THINKING FOR THE MOVE LOGIC AROUND WALLS FOR NOW===============//
     function allowMovements(x, y){
@@ -286,13 +221,22 @@
     //         return true;
     //     }
     // }
+
+    function pickNum (){
+        ranNum1 = ~~(Math.random() * 4);
+        ranNum2 = ~~(Math.random() * 4);
+        ranNum3 = ~~(Math.random() * 4);
+        ranNum4 = ~~(Math.random() * 4);
+    }
+
+    setInterval(pickNum, 2000);
     // tracking ran at a different interval to keep the ghost movements to a relatively slower speed
     setInterval(tracking, 350);
     function tracking(){
-        ghost1.track();
-        ghost2.track();
-        ghost3.track();
-        ghost4.track();
+        ghost1.travel();
+        ghost2.travel();
+        ghost3.travel();
+        ghost4.travel();
         if(contact(pacman.x, pacman.y, ghost1.x, ghost1.y, size, pacman.r)){
             ghost1.x = 320;
             ghost1.y = 410;
@@ -480,27 +424,21 @@
         fill(150,625,60,10, "#093593")
 
         // bottom row - second object - middle rectangle
-        fill(275, 685, 50, 10,"#093593")
-        fill(275, 735, 50, 10,"#093593")
-        fill(275, 685, 10, 50,"#093593")
-        fill(325,685,10,60, "#093593")
+        hollowFill(280, 695, 50, 50, "#093593");
+        // fill(275, 685, 50, 10,"#093593")
+        // fill(275, 735, 50, 10,"#093593")
+        // fill(275, 685, 10, 50,"#093593")
+        // fill(325,685,10,60, "#093593")
         // bottom row - third object - right L
-        fill(400, 685, 155, 10,"#093593")
-        fill(400, 735, 155, 10,"#093593")
-        fill(550, 685, 10, 60,"#093593")
-        fill(400,685,10,60, "#093593")
-        fill(400,625,10,60, "#093593")
-        fill(450,625,10,60, "#093593")
-        fill(400,625,60,10, "#093593")
-
-
-
-
-
-
-
-
-
+        hollowFill(400, 695, 155, 50, "#093593");
+        hollowFill(400, 635, 50, 60, "#093593");
+        // fill(400, 685, 155, 10,"#093593")
+        // fill(400, 735, 155, 10,"#093593")
+        // fill(550, 685, 10, 60,"#093593")
+        // fill(400,685,10,60, "#093593")
+        // fill(400,625,10,60, "#093593")
+        // fill(450,625,10,60, "#093593")
+        // fill(400,625,60,10, "#093593")
 
 
 
@@ -509,6 +447,13 @@
         fillC(pacman.x, pacman.y, pacman.r, "yellow");
         context.font="20px Arial";
         context.fillText(`Lives left: ${livesLeftCounter}`,480,20)
+        if(direction === "Right") {
+            fillC(pacman.x + pacman.r / 3, pacman.y - pacman.r / 3, 1.5, "#000000");
+        } else if (direction === "Up" || direction === "Left"){
+            fillC(pacman.x - pacman.r / 3, pacman.y - pacman.r / 3, 1.5, "#000000");
+        } else if(direction === "Down"){
+            fillC(pacman.x + pacman.r / 3, pacman.y + pacman.r / 3, 1.5, "#000000");
+        }
         fill(ghost1.x, ghost1.y, size, size, ghost1.c);
         fill(ghost1.x + size/4.25, ghost1.y + size/4, eyes, eyes, "#ffffff");
         fill(ghost1.x + size/1.5, ghost1.y + size/4, eyes, eyes, "#ffffff");
@@ -522,7 +467,25 @@
         fill(ghost4.x + size/4.25, ghost4.y + size/4, eyes, eyes, "#ffffff");
         fill(ghost4.x + size/1.5, ghost4.y + size/4, eyes, eyes, "#ffffff");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
+
     function fill(x, y, w, h, c){
         context.fillStyle = c;
         context.fillRect(x, y, w, h);
@@ -537,7 +500,7 @@
     }
     function hollowFill(x, y, w, h, c){
         context.strokeStyle = c;
-        context.lineWidth = 5;
+        context.lineWidth = 8;
         context.strokeRect(x, y, w, h);
     }
 
@@ -549,7 +512,7 @@
         if(e.key.includes("Arrow")){
             e.preventDefault();
         }
-        const direction = e.key.replace("Arrow", "");
+        direction = e.key.replace("Arrow", "");
         pacman.move(direction);
     });
 

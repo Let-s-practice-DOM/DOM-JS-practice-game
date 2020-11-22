@@ -49,7 +49,6 @@
             }
         }
     }
-    // will make more ghost later
     const ghost1 = {
         x: 320,
         y: 410,
@@ -274,15 +273,19 @@
 
 
 
-    //playerX, playerY, ghostX, ghostY, size
     // written in a way to allow any of the other ghost positions to be passed through for contact checking
-    function contact(px, py, gx, gy, gs, pr){
-        if((px + pr > gx && px < gx + gs) &&(py + pr > gy && py < gy + gs)){
+    function contact(pacManX, pacManY, ghostX, ghostY, ghostSize, pacManRadius){
+        if((pacManX + pacManRadius > ghostX && pacManX < ghostX + ghostSize) &&(pacManY + pacManRadius > ghostY && pacManY < ghostY + ghostSize)){
             return true;
-            //game will restart in some way
-            // console.log("CONTACT");
         }
     }
+
+    //========CONTACT IS A LITTLE BUGGY, NEEDS SOME WORK========//
+    // function contact(pacManX, pacManY, ghostX, ghostY, ghostSize, pacManRadius){
+    //     if((ghostX < pacManX + pacManRadius && ghostX + ghostSize > pacManX + pacManRadius) && (ghostY < pacManY + pacManRadius && ghostY + ghostSize > pacManY - pacManRadius)){
+    //         return true;
+    //     }
+    // }
     // tracking ran at a different interval to keep the ghost movements to a relatively slower speed
     setInterval(tracking, 350);
     function tracking(){
